@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "671341698024",
+    "project_id": "football-live-score-2d83e",
+    "storage_bucket": "football-live-score-2d83e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671341698024:android:f6a1d74a01a46cab38625d",
+        "android_client_info": {
+          "package_name": "com.football_live_score"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671341698024-bnjheedgilv0pb9vjtrvrdgpksr4s72j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPl9-nqmZKreCWXdwwXQYS7n7B-JSNwQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671341698024-bnjheedgilv0pb9vjtrvrdgpksr4s72j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
