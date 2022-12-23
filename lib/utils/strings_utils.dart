@@ -6,7 +6,7 @@ class StringsUtils {
   static const String emptyQuote = '';
   static ValueNotifier<int> bottomIndex = ValueNotifier(0);
 
-  static const String appName = 'Football Live Scores 2022';
+  static const String appName = 'Football Live Scores App';
   static const String ranking = 'Ranking';
   static const String home = 'Home';
   static const String score = 'Score';

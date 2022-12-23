@@ -1,7 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:football_live_score/utils/app_colors.dart';
+import 'package:football_live_score/utils/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:football_live_score/utils/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -70,12 +73,16 @@ class _BannerAdViewState extends State<BannerAdView> {
       size: const AdSize(width: 320, height: 70),
       // size: AdSize.fullBanner,
       request: request,
+      // adUnitId: "",
+      // ///live
+      adUnitId: FirebaseRemoteConfigUtils.bannerAdsForAdMob,
+
+      // adUnitId: Platform.isAndroid
+      //     ? ''
+      //     : '',
 
       ///test
-      // adUnitId: Platform.isAndroid
-      //     ? 'ca-app-pub-3940256099942544/1033173712'
-      //     : '',
-      adUnitId: Platform.isAndroid ? 'ca-app-pub-1059261209286430/8757304952' : '',
+      // adUnitId: "ca-app-pub-3940256099942544/6300978111",
 
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {

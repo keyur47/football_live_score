@@ -8,6 +8,7 @@ import 'package:football_live_score/drawer/RegisterClassses.dart';
 // import 'package:football_live_score/firebase_options.dart';
 import 'package:football_live_score/helper/shared_preferences.dart';
 import 'package:football_live_score/utils/app_colors.dart';
+import 'package:football_live_score/utils/firebase_remote_config.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'fifa.dart';
@@ -22,6 +23,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseAnalyticsUtils.init();
+  await FirebaseRemoteConfigUtils().initMethod();
+
   await MobileAds.instance.initialize();
   // SystemChrome.setSystemUIOverlayStyle(
   //   const SystemUiOverlayStyle(

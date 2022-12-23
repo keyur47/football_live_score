@@ -51,6 +51,72 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  // Future fixtureApiCall() async {
+  //   try {
+  //     tempModel?.clear();
+  //     isLoading.value = true;
+  //     combileTemes?.value = await HomeService.fixtureApi();
+  //     combileTemes?.value.forEach((element) {
+  //       String dateTime = (element.time?.substring(0, 12) ?? '');
+  //       String date = displayDayAndDateTimes(dateTime, "yyyyMMddhhmm");
+  //       int? index = tempModel?.indexWhere((ele) {
+  //         return displayDayAndDateTimes(ele.time?.substring(0, 8).toString() ?? '00000000', "yyyyMMdd") ==
+  //             date.substring(0, 8).toString();
+  //       });
+  //       if (index != -1) {
+  //         var result = tempModel?[index!].data?.add(element);
+  //       } else {
+  //         ///add here
+  //         // int diff = newParsedDate.difference(DateTime.now()).inDays;
+  //         // timeAgo('');
+  //
+  //         TempModel dataModel = TempModel(data: [element], time: date);
+  //
+  //         tempModel?.add(dataModel);
+  //         /// for set scroll position
+  //         int? tempIndex = tempModel!.indexWhere((element) {
+  //           String year = DateTime.now().toString().substring(0, 4);
+  //           String month = DateTime.now().toString().substring(5, 7);
+  //           String day = DateTime.now().toString().substring(8, 10);
+  //           return element.time.toString().substring(0, 8) == '$year$month$day';
+  //         });
+  //         if (tempIndex != -1) {
+  //           todayIndex.value = tempIndex;
+  //         } else {
+  //           int? tempIndex2 = tempModel!.indexWhere((element) {
+  //             String year = DateTime.now().toString().substring(0, 4);
+  //             String month = DateTime.now().toString().substring(5, 7);
+  //             String day = DateTime.now().toString().substring(8, 10);
+  //             DateTime dt = DateTime.parse("$year-$month-$day");
+  //
+  //             String apiYear = element.time.toString().substring(0, 4);
+  //             String apiMonth = element.time.toString().substring(4, 6);
+  //             String apiDay = element.time.toString().substring(6, 8);
+  //             DateTime apiDt = DateTime.parse("$apiYear-$apiMonth-$apiDay");
+  //
+  //             return apiDt.isAfter(dt);
+  //           });
+  //           if (tempIndex2 != -1) {
+  //             todayIndex.value = tempIndex2;
+  //           }
+  //         }
+  //         scrollToIndex();
+  //         // /// for set scroll position
+  //         // todayIndex.value = tempModel!.indexWhere((element) {
+  //         //   String year = DateTime.now().toString().substring(0, 4);
+  //         //   String month = DateTime.now().toString().substring(5, 7);
+  //         //   String day = DateTime.now().toString().substring(8, 10);
+  //         //   return element.time.toString().substring(0, 8) == '$year$month$day';
+  //         // });
+  //         // scrollToIndex();
+  //       }
+  //     });
+  //   } catch (e) {
+  //     rethrow;
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
   Future fixtureApiCall() async {
     try {
       tempModel?.clear();
@@ -63,28 +129,48 @@ class HomeController extends GetxController {
           return displayDayAndDateTimes(ele.time?.substring(0, 8).toString() ?? '00000000', "yyyyMMdd") ==
               date.substring(0, 8).toString();
         });
+
         if (index != -1) {
           var result = tempModel?[index!].data?.add(element);
         } else {
           ///add here
-          // int diff = newParsedDate.difference(DateTime.now()).inDays;
-          // timeAgo('');
 
           TempModel dataModel = TempModel(data: [element], time: date);
 
           tempModel?.add(dataModel);
 
           /// for set scroll position
-          todayIndex.value = tempModel!.indexWhere((element) {
+          int? tempIndex = tempModel!.indexWhere((element) {
             String year = DateTime.now().toString().substring(0, 4);
             String month = DateTime.now().toString().substring(5, 7);
             String day = DateTime.now().toString().substring(8, 10);
             return element.time.toString().substring(0, 8) == '$year$month$day';
           });
+          if (tempIndex != -1) {
+            todayIndex.value = tempIndex;
+          } else {
+            int? tempIndex2 = tempModel!.indexWhere((element) {
+              String year = DateTime.now().toString().substring(0, 4);
+              String month = DateTime.now().toString().substring(5, 7);
+              String day = DateTime.now().toString().substring(8, 10);
+              DateTime dt = DateTime.parse("$year-$month-$day");
+
+              String apiYear = element.time.toString().substring(0, 4);
+              String apiMonth = element.time.toString().substring(4, 6);
+              String apiDay = element.time.toString().substring(6, 8);
+              DateTime apiDt = DateTime.parse("$apiYear-$apiMonth-$apiDay");
+
+              return apiDt.isAfter(dt);
+            });
+            if (tempIndex2 != -1) {
+              todayIndex.value = tempIndex2;
+            }
+          }
           scrollToIndex();
         }
       });
-    } catch (e) {
+    } catch (e,st) {
+      print("scrollToIndexscrollToIndex:-${e} ${st}");
       rethrow;
     } finally {
       isLoading.value = false;
@@ -107,27 +193,21 @@ class HomeController extends GetxController {
       matchDetailsModel?.value = MatchDetailsModel.fromJson(jsonDecode(json));
 
       for (Gd2Model element in matchDetailsModel?.value.root?.gd2 ?? []) {
-        // print('commentName 555: ${element.minutesPlayer}');
         int? index = matchDetailsModel?.value.root?.gd2?.indexWhere((ele) {
           return element.minutesPlayer == ele.playerModel?.id;
         });
-        // print('commentName 000: $index');
         if (index != -1) {
           List<String> commentName = matchDetailsModel?.value.root?.gd2?[index!].playerModel?.gd21 ?? [];
-          // print('commentName 01: $commentName');
           commentName.add(element.commentsPlayer.toString());
           matchDetailsModel?.value.root?.gd2?[index!].playerModel?.gd21 = commentName;
         } else {
           PlayerModel data = PlayerModel(id: element.minutesPlayer, gd21: [element.commentsPlayer.toString()]);
-          // print('commentName 02: ${data.gd21.toString()}');
           int? indexdd = matchDetailsModel?.value.root?.gd2?.indexOf(element);
           matchDetailsModel?.value.root?.gd2?[indexdd!].playerModel?.id = data.id;
           matchDetailsModel?.value.root?.gd2?[indexdd!].playerModel?.gd21 = data.gd21;
         }
       }
-      // print("Abc =====>${matchDetailsModel?.value.root?.detailedstats?.playerStats?.length}");
       matchDetailsModel?.value.root?.detailedstats?.playerStats?.forEach((element) {
-        print("object");
         if (element.playsOnHomeTeam == true) {
           homeTeamRow.add(element);
         } else {
@@ -136,17 +216,14 @@ class HomeController extends GetxController {
           }
         }
       });
-      // print("Preview screen =====>${homeTeamRow.length}");
-      // print("Preview screen =====>${awayTeamRow.length}");
+
       awayTeamRow.sort(
         (a, b) {
-          // print("Preview screen =====>${a?.playerRating}");
           return (b?.playerRating ?? 0.0).compareTo(a?.playerRating ?? 0.0);
         },
       );
       homeTeamRow.sort(
         (a, b) {
-          // print("Preview screen =====>${a?.playerRating}");
           return (b?.playerRating ?? 0.0).compareTo(a?.playerRating ?? 0.0);
         },
       );

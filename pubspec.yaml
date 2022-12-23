@@ -61,6 +61,7 @@ dependencies:
   firebase_messaging: ^14.0.4
   flutter_local_notifications: ^9.7.0
   rxdart: ^0.27.7
+  firebase_remote_config: ^3.0.6
   app_settings: ^4.1.5
   in_app_review: ^2.0.4
   permission_handler: ^10.0.0

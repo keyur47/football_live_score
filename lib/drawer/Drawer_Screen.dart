@@ -118,16 +118,19 @@ class _DrawerScreenState extends State<DrawerScreen> with SingleTickerProviderSt
           child: Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               width: MediaQuery.of(context).size.width * 0.6,
               child: Padding(
-                padding: EdgeInsets.only(right: 50.0),
+                padding: const EdgeInsets.only(),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     RotationTransition(
                       turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
                       child: Image.asset(
                         AssetsPath.football,
+                        height: SizeUtils.horizontalBlockSize * 25,
+                        width: SizeUtils.horizontalBlockSize * 25,
                       ),
                     ),
                     SizedBox(

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:football_live_score/utils/firebase_remote_config.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class InterstitalAd {
@@ -18,50 +19,16 @@ class InterstitalAd {
     nonPersonalizedAds: true,
   );
 
-  // @override
-  // void initState() {
-  //   createInterstitialAd();
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _interstitialAd?.dispose();
-  //   super.dispose();
-  // }
-
-  // @override
-  // InterstitialAd myInterstitial = InterstitialAd(
-  //   adUnitId: Platform.isAndroid
-  //       ? 'ca-app-pub-3940256099942544~3347511713'
-  //       : '', //and:ca-app-pub-3940256099942544/6300978111,
-  //   request: request,
-  //   listener: AdListener(
-  //     onAdLoaded: (Ad ad) {
-  //       print('${ad.runtimeType} loaded.');
-  //       _interstitialReady = true;
-  //     },
-  //     onAdFailedToLoad: (Ad ad, LoadAdError error) {
-  //       print('${ad.runtimeType} failed to load: $error.');
-  //       ad.dispose();
-  //       _interstitialAd = null;
-  //       createInterstitialAd();
-  //     },
-  //     onAdOpened: (Ad ad) => print('${ad.runtimeType} onAdOpened.'),
-  //     onAdClosed: (Ad ad) {
-  //       print('${ad.runtimeType} closed.');
-  //       ad.dispose();
-  //       createInterstitialAd();
-  //     },
-  //     onApplicationExit: (Ad ad) =>
-  //         print('${ad.runtimeType} onApplicationExit.'),
-  //   ),
-  // );
-
   static Future<void> createInterstitialAd() async {
     await InterstitialAd.load(
-      adUnitId: "ca-app-pub-1059261209286430/7232470296",
-      // adUnitId: "ca-app-pub-3940256099942544~3347511713",
+      // adUnitId: "",
+
+      /// live id
+      adUnitId: FirebaseRemoteConfigUtils.interstitialAdsForAdMob,
+
+      /// test id
+      // adUnitId: "ca-app-pub-3940256099942544/1033173712",
+
       request: request,
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {

@@ -1,3 +1,4 @@
+import 'package:football_live_score/ads/banner_ad.dart';
 import 'package:football_live_score/helper/firebase_analyticsUtils.dart';
 import 'package:football_live_score/helper/loading_helper.dart';
 import 'package:football_live_score/modules/dashbord/home/controller/home_controller.dart';
@@ -226,7 +227,7 @@ class _RankingScreenState extends State<RankingScreen> {
       {String? groupNo, String? imgUrl, String? countryName, String? plPoints, String? gdPoints, String? ptsPoint}) {
     return Container(
       constraints: const BoxConstraints(maxHeight: double.maxFinite),
-      child: ListView.builder(
+      child: ListView.separated(
           itemCount: rankingController.rankingTableModel.value.root?.table?.subt?.length ?? 0,
           padding: EdgeInsets.symmetric(horizontal: SizeUtils.verticalBlockSize * 1.8),
           shrinkWrap: true,
@@ -406,7 +407,23 @@ class _RankingScreenState extends State<RankingScreen> {
                 ),
               ),
             );
-          }),
+          },
+        separatorBuilder: (BuildContext context, int index) {
+          if ((index + 10) % 3 == 0) {
+            return Container(
+              margin: EdgeInsets.symmetric(
+                vertical: SizeUtils.horizontalBlockSize * 1,
+              ),
+              child: const BannerAdView(),
+            );
+          } else {
+            return SizedBox(
+              height: SizeUtils.horizontalBlockSize * 1,
+              // height: NavigationToolbar.kMiddleSpacing,
+            );
+          }
+        },
+      ),
     );
   }
 

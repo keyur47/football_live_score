@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:football_live_score/utils/firebase_remote_config.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AppOpenAdManager {
@@ -13,8 +14,14 @@ class AppOpenAdManager {
 
   static Future<void> loadAd() async {
     AppOpenAd.load(
-      adUnitId: "ca-app-pub-1059261209286430/4336458619",
-      // adUnitId: "ca-app-pub-3940256099942544/3419835294",
+      // adUnitId: "",
+      adUnitId: FirebaseRemoteConfigUtils.openAdsForAdMob,
+
+      /// live id
+      // adUnitId: "ca-app-pub-1059261209286430/8367723455",
+      /// test id
+      //  adUnitId: "ca-app-pub-3940256099942544/3419835294",
+
       orientation: AppOpenAd.orientationPortrait,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(

@@ -42,7 +42,7 @@ class Root {
     this.ct,
     this.ts,
     this.ccode,
-    this.tbd,
+    // this.tbd,
   });
 
   Lh? lu;
@@ -53,7 +53,7 @@ class Root {
   Ccode? ct;
   Ccode? ts;
   Ccode? ccode;
-  Lh? tbd;
+  // Lh? tbd;
 
   factory Root.fromJson(Map<String, dynamic> json) => Root(
         lu: Lh.fromJson(json["LU"]),
@@ -64,7 +64,7 @@ class Root {
         ct: Ccode.fromJson(json["CT"]),
         ts: Ccode.fromJson(json["TS"]),
         ccode: Ccode.fromJson(json["CCODE"]),
-        tbd: Lh.fromJson(json["TBD"]),
+        // tbd: Lh.fromJson(json["TBD"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,7 +76,7 @@ class Root {
         "CT": ct?.toJson(),
         "TS": ts?.toJson(),
         "CCODE": ccode?.toJson(),
-        "TBD": tbd?.toJson(),
+        // "TBD": tbd?.toJson(),
       };
 }
 
